@@ -1,0 +1,15 @@
+# Use Eclipse Temurin JDK 21 on Alpine Linux for a lightweight runtime environment
+FROM eclipse-temurin:21-jdk-alpine
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the executable JAR file from the local build directory to the container
+# The wildcard ensures the correct versioned JAR is picked up
+COPY build/libs/*.jar app.jar
+
+# Document the port that the application listens on
+EXPOSE 8080
+
+# Configure the container to run as an executable
+ENTRYPOINT ["java", "-jar", "app.jar"]
